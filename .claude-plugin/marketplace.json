@@ -1,0 +1,16 @@
+{
+  "name": "claude-mods",
+  "owner": {
+    "name": "HikiJun97"
+  },
+  "metadata": {
+    "description": "Personal Claude Code mods."
+  },
+  "plugins": [
+    {
+      "name": "where-am-i",
+      "source": "./where-am-i",
+      "description": "Pins the checked-out branch and the repo/worktree folder to the status line under the prompt."
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{ "name": "where-am-i", "version": "0.1.0", "description": "Pins the checked-out branch and the repo/worktree folder to the status line under the prompt." }
