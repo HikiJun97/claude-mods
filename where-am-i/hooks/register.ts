@@ -5,14 +5,15 @@ async function git($: EngineInterface, args: string[]): Promise<string | undefin
   return exitCode === 0 ? stdout.trim() : undefined
 }
 
-// "⎇ <branch>  ·  <absolute path of the checkout>", for the main checkout and a linked worktree alike.
+// "<git icon> <branch>  ·  <absolute path of the checkout>", for the main checkout and a linked worktree alike.
+// The icon is the Nerd Font git logo (nf-dev-git), so the terminal font must be a Nerd Font.
 export async function locate($: EngineInterface): Promise<string | undefined> {
   const place = await git($, ['rev-parse', '--show-toplevel'])
   if (place === undefined) return undefined
 
   const branch = (await git($, ['branch', '--show-current'])) || `detached ${await git($, ['rev-parse', '--short', 'HEAD'])}`
 
-  return `⎇ ${branch}  ·  ${place}`
+  return ` ${branch}  ·  ${place}`
 }
 
 async function refresh($: EngineInterface): Promise<void> {

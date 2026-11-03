@@ -28,7 +28,7 @@ test('shows the branch and the absolute worktree path in a linked worktree', asy
 
   await $.session.start({ cwd: WT, surface: 'terminal', isInteractive: true })
 
-  expect(pinned).toEqual(['⎇ fix/org-tree  ·  /r/laighthouse-web/.claude/worktrees/bright-discovering-plum'])
+  expect(pinned).toEqual(['\ue702 fix/org-tree  ·  /r/laighthouse-web/.claude/worktrees/bright-discovering-plum'])
 })
 
 test('shows the absolute repo path in the main checkout, and the commit when detached', async ($, on) => {
@@ -41,7 +41,7 @@ test('shows the absolute repo path in the main checkout, and the commit when det
 
   await $.session.start({ cwd: '/r/laighthouse-web', surface: 'terminal', isInteractive: true })
 
-  expect(pinned).toEqual(['⎇ detached f456ef2  ·  /r/laighthouse-web'])
+  expect(pinned).toEqual(['\ue702 detached f456ef2  ·  /r/laighthouse-web'])
 })
 
 test('clears the line outside a git repo', async ($, on) => {
