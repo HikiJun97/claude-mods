@@ -1,1 +1,1 @@
-{ "name": "where-am-i", "version": "0.1.0", "description": "Shows the checked-out branch and the absolute path of the repo/worktree under the prompt, and the context window's fill at the right end.", "types": "./types/index.d.ts" }
+{ "name": "where-am-i", "version": "0.2.0", "description": "Shows the checked-out branch and the absolute path of the repo/worktree under the prompt, and the context window's fill at the right end.", "types": "./types/index.d.ts" }
