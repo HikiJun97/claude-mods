@@ -10,7 +10,7 @@
     {
       "name": "where-am-i",
       "source": "./where-am-i",
-      "description": "Pins the checked-out branch and the absolute path of the repo/worktree to the status line under the prompt."
+      "description": "Shows the checked-out branch and the absolute path of the repo/worktree under the prompt, and the context window's fill at the right end."
     }
   ]
 }
