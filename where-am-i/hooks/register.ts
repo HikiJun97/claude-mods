@@ -5,15 +5,11 @@ async function git($: EngineInterface, args: string[]): Promise<string | undefin
   return exitCode === 0 ? stdout.trim() : undefined
 }
 
-// "⎇ <branch>  ·  <repo>" in the main checkout, "⎇ <branch>  ·  <repo> › <worktree>" in a linked worktree.
+// "⎇ <branch>  ·  <absolute path of the checkout>", for the main checkout and a linked worktree alike.
 export async function locate($: EngineInterface): Promise<string | undefined> {
-  const paths = await git($, ['rev-parse', '--path-format=absolute', '--show-toplevel', '--git-dir', '--git-common-dir'])
-  if (paths === undefined) return undefined
+  const place = await git($, ['rev-parse', '--show-toplevel'])
+  if (place === undefined) return undefined
 
-  const [top = '', gitDir, commonDir = ''] = paths.split('\n')
-  const repo = commonDir.replace(/\/\.git\/?$/, '').split('/').pop()
-  const folder = top.split('/').pop()
-  const place = gitDir === commonDir ? repo : `${repo} › ${folder}`
   const branch = (await git($, ['branch', '--show-current'])) || `detached ${await git($, ['rev-parse', '--short', 'HEAD'])}`
 
   return `⎇ ${branch}  ·  ${place}`

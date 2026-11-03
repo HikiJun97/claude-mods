@@ -17,23 +17,23 @@ function fakeGit(on: On, answers: Record<string, string>) {
   return pinned
 }
 
-const PATHS = 'rev-parse --path-format=absolute --show-toplevel --git-dir --git-common-dir'
+const TOP = 'rev-parse --show-toplevel'
 
-test('shows the branch and the worktree folder in a linked worktree', async ($, on) => {
+test('shows the branch and the absolute worktree path in a linked worktree', async ($, on) => {
   const pinned = fakeGit(on, {
-    [PATHS]: `${WT}\n/r/laighthouse-web/.git/worktrees/bright-discovering-plum\n/r/laighthouse-web/.git`,
+    [TOP]: WT,
     'branch --show-current': 'fix/org-tree',
   })
   on('session.start', async (_$, e) => ({ cwd: e.cwd }))
 
   await $.session.start({ cwd: WT, surface: 'terminal', isInteractive: true })
 
-  expect(pinned).toEqual(['⎇ fix/org-tree  ·  laighthouse-web › bright-discovering-plum'])
+  expect(pinned).toEqual(['⎇ fix/org-tree  ·  /r/laighthouse-web/.claude/worktrees/bright-discovering-plum'])
 })
 
-test('shows only the repo in the main checkout, and the commit when detached', async ($, on) => {
+test('shows the absolute repo path in the main checkout, and the commit when detached', async ($, on) => {
   const pinned = fakeGit(on, {
-    [PATHS]: '/r/laighthouse-web\n/r/laighthouse-web/.git\n/r/laighthouse-web/.git',
+    [TOP]: '/r/laighthouse-web',
     'branch --show-current': '',
     'rev-parse --short HEAD': 'f456ef2',
   })
@@ -41,7 +41,7 @@ test('shows only the repo in the main checkout, and the commit when detached', a
 
   await $.session.start({ cwd: '/r/laighthouse-web', surface: 'terminal', isInteractive: true })
 
-  expect(pinned).toEqual(['⎇ detached f456ef2  ·  laighthouse-web'])
+  expect(pinned).toEqual(['⎇ detached f456ef2  ·  /r/laighthouse-web'])
 })
 
 test('clears the line outside a git repo', async ($, on) => {
